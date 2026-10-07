@@ -13,26 +13,23 @@ jobs:
 
     steps:
       - name: Checkout Código
-        uses: actions/Checkout@v4
+        uses: actions/checkout@v4
 
       - name: Executar Hello world  
         run: echo " hello Github Actions"
 
       - name: Mostrar informações do Sistema
-        run: 
+        run: |
           echo "Sistema Operacional: ${{ runner.os }}"  
           echo "Diretório Atual: $(pwd)"
           echo "Data Atual: $(date)"
           echo "Usuário: $(whoami)"
 
       - name: Listar arquivos do repositório
-        run: ls-la
+        run: ls -la
 
       - name: Comandos múltiplos
-        run:
+        run: |
           echo "Este é o lab 01 do curso de Github Actions"  
           echo "Workflow executado com sucesso"
           echo "Pronto para os próximos desafios"
-            
-
-
