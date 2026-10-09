@@ -1,28 +1,30 @@
-name: Relatório Diário Automatizado
+name: Push Trigger Workflow
 
 on:
-  schedule:
-    - cron: '7 14 9 10 *'   # 09/10 às 14:07 UTC (11:07 no Brasil)
-  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - develop
+    paths:
+      - 'src/**'
+      - 'README.md'
 
 jobs:
-  scheduled-job:
+  push-job:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Código
+      - name: Checkout código
         uses: actions/checkout@v4
 
-      - name: Informações de schedule
+      - name: Informações do Push
         run: |
-          echo "workflow disparado por SCHEDULE"
-          echo "Data atual: $(date)"
-          echo "Hora UTC: $(date -u)"
-          echo "Timezone: $(date +%Z)"
+          echo "Workflow disparado por PUSH"
+          echo "Commit: ${{ github.sha }}"
+          echo "Autor: ${{ github.actor }}"
+          echo "Branch: ${{ github.ref_name }}"
+          echo "Repositório: ${{ github.repository }}"
 
-      - name: Relatório diário automatizado
+      - name: Listar arquivos modificados
         run: |
-          echo "RELATÓRIO DIÁRIO AUTOMATIZADO"
-          echo "================================"
-          echo "Total de commits: $(git rev-list --all --count)"
-          echo "Contribuidores únicos: $(git shortlog -sn | wc -l)"
-          echo "Último commit: $(git log -1 --pretty=format:'%h - %s (%an, %ar)')"
+          echo "Arquivos no repositório:"
+          ls -la
