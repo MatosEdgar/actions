@@ -2,7 +2,7 @@ name: Relatório Diário Automatizado
 
 on:
   schedule:
-    - cron: '3 11 9 10 *'   # Executa em 09/10 às 11:03
+    - cron: '7 14 9 10 *'   # 09/10 às 14:07 UTC (11:07 no Brasil)
   workflow_dispatch:
 
 jobs:
@@ -25,4 +25,4 @@ jobs:
           echo "================================"
           echo "Total de commits: $(git rev-list --all --count)"
           echo "Contribuidores únicos: $(git shortlog -sn | wc -l)"
-          echo "Último commit: $(git log -1 --pretty=format:'%h - %s (%an, %ar
+          echo "Último commit: $(git log -1 --pretty=format:'%h - %s (%an, %ar)')"
